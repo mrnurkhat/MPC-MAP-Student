@@ -1,6 +1,52 @@
 function [public_vars] = student_workspace(read_only_vars,public_vars)
 %STUDENT_WORKSPACE Summary of this function goes here
 
+%% Week 3 - Motion control
+% Task 1 ------------------------------------------------------------------
+% in maps/custom_map_1.txt
+
+% Task 2 ------------------------------------------------------------------
+path_points = 100;
+border_padding = 2;
+
+% Straight line
+x = linspace(read_only_vars.map.limits(1)+border_padding, read_only_vars.map.limits(3)/2-border_padding, path_points);
+y = linspace(read_only_vars.map.limits(2)+border_padding, read_only_vars.map.limits(4)-border_padding, path_points);
+straight_line = [x', y'];
+
+% Sine wave
+y = linspace(read_only_vars.map.limits(2)+border_padding, read_only_vars.map.limits(4)-border_padding, path_points);
+amplitude = 2;
+frequency = 5;
+offset = 5;
+x = -amplitude * sin(frequency * x) + offset;
+sine_wave = [x', y'];
+
+% Circle
+x0 = 5;
+y0 = 5;
+R = 4;
+omeg = linspace(0, 2 * pi, path_points);
+x = x0 + R * cos(omeg);
+y = y0 + R * sin(omeg);
+circle = [x', y'];
+
+% Task 3 ------------------------------------------------------------------
+% Initialization
+if read_only_vars.counter == 1
+    public_vars.path = straight_line; % the trajectory to follow
+    public_vars.look_ahead_dist = 0.5;% Lh dist for pure pursuit
+    public_vars.target_point = 1;   % starting index in waypoints array
+    public_vars.desired_speed = 0.4; % constant velocity m/s
+    public_vars.slow_down_k = 0.5; % gain for braking at the end
+    public_vars.max_w = 0.8; % angular velocity limit
+    public_vars.finish_treshold = 1; % distance to stop the robot
+end
+
+% Rest of task 3 in plan_motion.m
+
+%% ------------------------------------------------------------------------
+
 % 8. Perform initialization procedure
 if (read_only_vars.counter == 1)
           
@@ -19,12 +65,10 @@ public_vars.particles = update_particle_filter(read_only_vars, public_vars);
 public_vars.estimated_pose = estimate_pose(public_vars); % (x,y,theta)
 
 % 12. Path planning
-public_vars.path = plan_path(read_only_vars, public_vars);
+%public_vars.path = plan_path(read_only_vars, public_vars);
 
 % 13. Plan next motion command
 public_vars = plan_motion(read_only_vars, public_vars);
-
-
 
 end
 
