@@ -14,5 +14,5 @@ System performance was optimized by tuning three key parameters: `sensor_noise`,
 
 The primary challenge involved debugging "particle collapse," where the filter would condense into a single point prematurely. While the estimated position was generally accurate, the filter occasionally converged to incorrect, distant regions of the map. This was resolved by significantly increasing `sensor_noise`, which maintained particle diversity and provided the stability necessary for reliable estimation. This adjustment also allowed for a lower `particles_count`, reducing computational complexity. Finally, experiments with `motion_noise` demonstrated that while lower values decreased the root-mean-square error (RMSE) between the actual and desired trajectories, a balanced value was essential for maintaining filter robustness during maneuvers.
 
-<img src="plots/pf_localization" alt="Particle Filter localization" width="300"/> <img src="plots/mocap_localization.png" alt="MOCAP localization" width="300"/>
+<img src="plots/pf_localization.png" alt="Particle Filter localization" width="400"/> <img src="plots/mocap_localization.png" alt="MOCAP localization" width="400"/>
 
