@@ -1,5 +1,6 @@
-**Author:**        Alikhan Nurkhat (242251)
-**Date:**            20.04.2026
+**Author:**         Alikhan Nurkhat (242251)
+
+**Date:**           20.04.2026
 
 #### Task 1 - Preparation
 <img src="plots/trajectory.png" width="400"/>  
