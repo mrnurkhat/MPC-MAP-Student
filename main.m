@@ -11,6 +11,7 @@ environment_setup;
 check_toolboxes;
 
 % Call setup procedure
+
 setup;
 
 % Default public variables

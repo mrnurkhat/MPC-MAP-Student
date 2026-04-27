@@ -4,15 +4,10 @@ function [path] = plan_path(read_only_vars, public_vars)
 planning_required = 1;
 
 if planning_required
-    
     path = astar(read_only_vars, public_vars);
-    
-    path = smooth_path(path);
-    
+    path = smooth_path(path, public_vars);
 else
-    
     path = public_vars.path;
-    
 end
 
 end
